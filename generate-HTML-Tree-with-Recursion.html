@@ -35,27 +35,48 @@
 
 
 /* ==== NODE CREATION OPTION ====== */
-  function createTree(container, data) {
+  // function createTree(container, data) {
 
-    for (let prop in data) {
-      // debugger;
-      let li = document.createElement('li');
-      li.textContent = prop;
-      container.append(li);
+  //   for (let prop in data) {
+  //     // debugger;
+  //     let li = document.createElement('li');
+  //     li.textContent = prop;
+  //     container.append(li);
 
-      if ( Object.keys(data[prop]).length === 0 ) { 
-        continue; // base of recursion: Object has no properties.
-
-      } else {
-        let ul = document.createElement('ul');
-        li.append(ul);
+  //     if ( Object.keys(data[prop]).length === 0 ) { 
+  //       continue; // base of recursion: Object has no properties.
+  //     } else {
+  //       let ul = document.createElement('ul');
+  //       li.append(ul);
         
-        createTree(ul, data[prop]); // recursive step: call self with simplified arguments.
+  //       createTree(ul, data[prop]); // recursive step: call self with simplified arguments.
+  //     }
+  //   }
+  // }
+
+
+/* ========= INNER HTML VERSION ========== */
+  function createTree(container, data) {
+    let html = '';
+    createRecursively(data);
+    container.innerHTML = html;
+
+    function createRecursively(data) {
+      for (let prop in data) {
+        html += `<li>${prop}`;
+  
+        if ( Object.keys(data[prop]).length === 0 ) { 
+          html += `</li>`;
+          continue; // base of recursion: Object has no properties.
+        } else {
+          html += `<ul>`;
+          createRecursively(data[prop]); // recursive step: call self with simplified arguments.
+          html += `</li></ul>`;
+        }
       }
     }
-    
   }
-  
+
   
   // function createTree(container, data) {
   //   for (let prop in data) {
