@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <ul class="box"></ul>
+<script>
+
+  const nested = {
+    "Fish": {
+      "trout": {},
+      "salmon": {}
+    },
+
+    "Tree": {
+      "Huge": {
+        "sequoia": {},
+        "oak": {}
+      },
+      "Flowering": {
+        "apple tree": {},
+        "magnolia": {}
+      }
+    }
+  };
+
+  const box = document.querySelector('.box');
+
+  createTree(box, nested);
+
+
+
+/* ==== NODE CREATION OPTION ====== */
+  function createTree(container, data) {
+
+    for (let prop in data) {
+      // debugger;
+      let li = document.createElement('li');
+      li.textContent = prop;
+      container.append(li);
+
+      if ( Object.keys(data[prop]).length === 0 ) { 
+        continue; // base of recursion: Object has no properties.
+
+      } else {
+        let ul = document.createElement('ul');
+        li.append(ul);
+        
+        createTree(ul, data[prop]); // recursive step: call self with simplified arguments.
+      }
+    }
+    
+  }
+  
+  
+  // function createTree(container, data) {
+  //   for (let prop in data) {
+  //     // if the property contains further objects
+  //     if (Object.keys(data[prop]).length !== 0 ) {
+  //       let li = document.createElement('li');
+  //       li.textContent = prop;
+  //       let ul = document.createElement('ul');
+  //       li.append(ul);
+  //       container.append(li);
+
+  //       for (let key in data[prop]) {
+  //         if (Object.keys(data[prop][key]).length !== 0 ) {
+  //           let li = document.createElement('li');
+  //           li.textContent = key;
+  //           let ul = document.createElement('ul');
+  //           li.append(ul);
+  //           container.querySelector('li').append(li);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  
+
+
+  // function createTree(container, data) {
+  //   let HTML = '';
+
+  //   for ( key of Object.keys(data) ) {
+  //     let subHTML = `<li>${key}</li>`;
+
+  //     if ( Object.keys(data.key).length !== 0 ) {
+  //       subHTML += `<ul>`
+
+  //     }
+  //   }
+  //   // check if obj has further objects as properties. if it does, it gets a UL first.
+  //   if (Object.keys(obj).length === 0 );
+  //     HTML += `<li>${obj}</li>`
+
+  //   if (obj.hasOwnProperties. )
+  //   for (key of obj) {
+  //     HTML += key;
+  //   }
+  //   container.innerHTML = HTML;
+  // }
+  
+
+  
+
+    
+</script>
+</body>
+</html>
