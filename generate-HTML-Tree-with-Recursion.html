@@ -56,26 +56,47 @@
 
 
 /* ========= INNER HTML VERSION ========== */
-  function createTree(container, data) {
-    let html = '';
-    createRecursively(data);
-    container.innerHTML = html;
+  // function createTree(container, data) {
+  //   let html = '';
+  //   createRecursively(data);
+  //   container.innerHTML = html;
 
-    function createRecursively(data) {
-      for (let prop in data) {
-        html += `<li>${prop}`;
+  //   function createRecursively(data) {
+  //     for (let prop in data) {
+  //       html += `<li>${prop}`;
   
-        if ( Object.keys(data[prop]).length === 0 ) { 
-          html += `</li>`;
-          continue; // base of recursion: Object has no properties.
-        } else {
-          html += `<ul>`;
-          createRecursively(data[prop]); // recursive step: call self with simplified arguments.
-          html += `</li></ul>`;
-        }
-      }
+  //       if ( Object.keys(data[prop]).length === 0 ) { 
+  //         html += `</li>`;
+  //         continue; // base of recursion: Object has no properties.
+  //       } else {
+  //         html += `<ul>`;
+  //         createRecursively(data[prop]); // recursive step: call self with simplified arguments.
+  //         html += `</li></ul>`;
+  //       }
+  //     }
+  //   }
+  // }
+
+
+/* ========= INNER HTML VERSION: MODEL SOLUTION ========== */
+    function createTree(container, obj) {
+      container.innerHTML = createTreeText(obj);
     }
-  }
+
+    function createTreeText(obj) { // standalone recursive function
+      let li = '';
+      let ul;
+      for (let key in obj) {
+        li += '<li>' + key + createTreeText(obj[key]) + '</li>';
+      }
+      if (li) {
+        ul = '<ul>' + li + '</ul>'
+      }
+      return ul || ''; // returns first truthy; if none found returns the last item.
+    }
+
+
+
 
   
   // function createTree(container, data) {
